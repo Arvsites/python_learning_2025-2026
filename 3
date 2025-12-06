@@ -1,0 +1,21 @@
+// Светодиод на пине 13 (встроенный LED)
+int ledPin = 13;
+
+void setup() {
+  Serial.begin(9600);  // Скорость связи с Python
+  pinMode(ledPin, OUTPUT);  // Настраиваем пин как выход
+  digitalWrite(ledPin, LOW);  // Выключаем LED в начале
+}
+
+void loop() {
+  if (Serial.available() > 0) {  // Ждём команду от Python
+    char command = Serial.read();  // Читаем символ
+    
+    if (command == '1') {  // '1' = включить
+      digitalWrite(ledPin, HIGH);
+    } 
+    else if (command == '0') {  // '0' = выключить
+      digitalWrite(ledPin, LOW);
+    }
+  }
+}
